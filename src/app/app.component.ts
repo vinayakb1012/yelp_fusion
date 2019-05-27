@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RestService } from './services/rest.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'balluApp';
+  title = 'NYC restos';
+
+  nycrestos: any;
+
+  constructor(private yelpFusionApiService: RestService) {
+    this.yelpFusionApiService.getNYCrestos()
+    .subscribe((response) => {
+      console.log('response', response);
+      this.nycrestos = response;
+    })
+  } 
 }
